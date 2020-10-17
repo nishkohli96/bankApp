@@ -1,7 +1,6 @@
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 import SplashScreen from '@scenes/SplashScreen/';
-import ExampleScreen from '@scenes/ExampleScreen';
-
+import BankPage from '@scenes/BankPage';
 /**
  * The root screen contains the application's navigation.
  *
@@ -14,7 +13,7 @@ const StackNavigator = createStackNavigator(
     SplashScreen,
     // The main application screen is our "ExampleScreen". Feel free to replace it with your
     // own screen and remove the example.
-    MainScreen: ExampleScreen
+    MainScreen: BankPage
   },
   {
     // By default the application will show the splash screen
