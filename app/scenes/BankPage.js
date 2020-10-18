@@ -15,8 +15,16 @@ const BankPage = () => (
     <StatusBar backgroundColor="#d1d156" />
     <Header />
     <View style={styles.iconContainer}>
-      <IconContainer Icon={<BankIcon />} title="Search by IFSC" />
-      <IconContainer Icon={<FavouritesIcon />} title="Favourites" />
+      <IconContainer
+        Icon={<BankIcon />}
+        title="Search by IFSC"
+        toScreen="BankSearch"
+      />
+      <IconContainer
+        Icon={<FavouritesIcon />}
+        title="Favourites"
+        toScreen="FavsList"
+      />
     </View>
   </View>
 );

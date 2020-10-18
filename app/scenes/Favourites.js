@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const SearchBank = () => (
+const Favourites = () => (
   <View>
-    <Text>search bank</Text>
+    <Text>favs</Text>
   </View>
 );
 
-export default SearchBank;
+export default Favourites;

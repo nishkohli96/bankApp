@@ -1,12 +1,19 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { useNavigation } from 'react-navigation-hooks';
 
-const IconContainer = ({ Icon, title }) => (
-  <View style={styles.container}>
-    {Icon}
-    <Text style={styles.itemText}>{title}</Text>
-  </View>
-);
+const IconContainer = ({ Icon, title, toScreen }) => {
+  const navigation = useNavigation();
+
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate(toScreen)}>
+      <View style={styles.container}>
+        {Icon}
+        <Text style={styles.itemText}>{title}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -16,8 +23,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: 'beige',
     width: 140,
-    marginLeft: 15,
-    marginRight: 15
+    margin: 15
   },
   itemText: {
     marginTop: 10

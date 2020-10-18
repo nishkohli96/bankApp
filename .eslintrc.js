@@ -1,9 +1,8 @@
-
 const fs = require('fs');
 const path = require('path');
 
 const prettierOptions = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'),
+  fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8')
 );
 
 // const app = JSON.parse(path.resolve(__dirname, 'app'));
@@ -12,19 +11,26 @@ module.exports = {
   root: true,
   parser: 'babel-eslint',
   extends: ['airbnb', 'prettier', 'prettier/react'],
-  plugins: ['prettier', 'redux-saga', 'react-native', 'react', 'react-hooks', 'jsx-a11y'],
+  plugins: [
+    'prettier',
+    'redux-saga',
+    'react-native',
+    'react',
+    'react-hooks',
+    'jsx-a11y'
+  ],
   env: {
     jest: true,
     browser: true,
     node: true,
-    es6: true,
+    es6: true
   },
   parserOptions: {
     ecmaVersion: 6,
     sourceType: 'module',
     ecmaFeatures: {
-      jsx: true,
-    },
+      jsx: true
+    }
   },
   rules: {
     'prettier/prettier': ['error', prettierOptions],
@@ -42,8 +48,8 @@ module.exports = {
       2,
       2,
       {
-        SwitchCase: 1,
-      },
+        SwitchCase: 1
+      }
     ],
     'jsx-a11y/aria-props': 2,
     'jsx-a11y/heading-has-content': 0,
@@ -53,8 +59,8 @@ module.exports = {
         // NOTE: If this error triggers, either disable it or add
         // your custom components, labels and attributes via these options
         // See https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-associated-control.md
-        controlComponents: ['Input'],
-      },
+        controlComponents: ['Input']
+      }
     ],
     'jsx-a11y/label-has-for': 0,
     'jsx-a11y/mouse-events-have-key-events': 2,
@@ -84,27 +90,27 @@ module.exports = {
     'require-yield': 0,
     'react/no-array-index-key': 0
   },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "app": "./app",
-        "context": "app",
-        "resolve": {
-          "alias": {
-            "@assets": "./app/assets",
-            "@components": "./app/components",
-            "@containers": "./app/containers",
-            "@config": "./app/config",
-            "@navigators": "./app/navigators",
-            "@services": "./app/services",
-            "@themes": "./app/themes",
-            "@utils": "./app/utils"
+  settings: {
+    'import/resolver': {
+      node: {
+        app: './app',
+        context: 'app',
+        resolve: {
+          alias: {
+            '@assets': './app/assets',
+            '@components': './app/components',
+            '@containers': './app/containers',
+            '@config': './app/config',
+            '@navigators': './app/navigators',
+            '@services': './app/services',
+            '@themes': './app/themes',
+            '@utils': './app/utils'
           },
-          "paths": ["app"],
-          "modules": ["app", 'node_modules'],
-          "extensions": ['.js', '.jsx', '.json', '.coffee', '.cjsx'],
+          paths: ['app'],
+          modules: ['app', 'node_modules'],
+          extensions: ['.js', '.jsx', '.json', '.coffee', '.cjsx']
         }
       }
     }
   }
-}
+};

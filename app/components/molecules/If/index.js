@@ -4,7 +4,7 @@
  *
  */
 // eslint-disable-next-line
-import React from 'react'
+import React from 'react';
 import Proptypes from 'prop-types';
 const If = props => (props.condition ? props.children : props.otherwise);
 If.propsTypes = {
