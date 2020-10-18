@@ -2,7 +2,7 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 import SplashScreen from '@scenes/SplashScreen/';
 import BankPage from '@scenes/BankPage';
 import SearchBank from '@scenes/SearchBank';
-import Favourites from '@scenes/Favourites';
+import Favourites from '@scenes/FavBanks';
 import BankDetails from '@components/BankDetails';
 /**
  * The root screen contains the application's navigation.
