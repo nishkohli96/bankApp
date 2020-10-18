@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import ScreenHeader from '@atoms/ScreenHeader';
+import GetBankDetails from '@services/GetBankDetails';
+import { useNavigation } from 'react-navigation-hooks';
 
 const SearchBank = () => {
 	const [text, setText] = React.useState('');
+  const navigation = useNavigation();
 
 	const getBankDetails = () => {
-		console.log(text);
+    // console.log(text);
+    // GetBankDetails(text);
+    navigation.navigate('BankInfo');
 	};
 
 	return (

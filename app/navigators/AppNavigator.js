@@ -3,6 +3,7 @@ import SplashScreen from '@scenes/SplashScreen/';
 import BankPage from '@scenes/BankPage';
 import SearchBank from '@scenes/SearchBank';
 import Favourites from '@scenes/Favourites';
+import BankDetails from '@components/BankDetails';
 /**
  * The root screen contains the application's navigation.
  *
@@ -17,7 +18,8 @@ const StackNavigator = createStackNavigator(
 		// own screen and remove the example.
 		MainScreen: BankPage,
 		BankSearch: SearchBank,
-		FavsList: Favourites
+		FavsList: Favourites,
+		BankInfo: BankDetails
 	},
 	{
 		// By default the application will show the splash screen
