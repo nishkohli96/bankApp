@@ -16,6 +16,7 @@ class FavBanks extends React.Component {
 
 	getFavBanks = () => () => {
         console.log('get list');
+        console.log(this.state);
 		// this.props.fetchBanks();
     };
     
@@ -30,5 +31,18 @@ class FavBanks extends React.Component {
 
 }
 
-export default compose(injectIntl)(FavBanks);
-export { FavBanks };
+const mapStateToProps = (state) => {
+    console.log(state.bank)
+    return {
+      banksList : state.bank.banksList,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+      reduxIncreaseCounter: () => console.log('inc'),
+      reduxDecreaseCounter: () => console.log('dec'),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FavBanks);

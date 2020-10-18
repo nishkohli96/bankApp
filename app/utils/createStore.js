@@ -17,6 +17,7 @@ const persistConfig = {
 	key: 'root',
 	transforms: [immutableTransform()],
 	storage: AsyncStorage,
+	whiteList: ['bank'],
 	/**
 	 * Blacklist state that we do not need/want to persist
 	 */

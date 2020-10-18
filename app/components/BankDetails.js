@@ -58,7 +58,26 @@ const BankDetails = () => {
         const t2 = 'Bank removed from Favourites';
         const text = fav ? t2: t1;
         setVisible(true);
-        setsbText(text);
+		setsbText(text);
+		
+		const bankObj = {
+			bankName,
+			bankCode,
+			ifsc,
+			branch,
+			address,
+			contact,
+			city,
+			district,
+			centre,
+			state,
+			rtgs,
+			neft,
+			micr,
+			imps,
+			upi
+		};
+		console.log(bankObj)
 	};
 
 	if (!fontsLoaded) {

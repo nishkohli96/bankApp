@@ -1,48 +1,32 @@
-import { createActions } from 'reduxsauce';
-import { fromJS } from 'immutable';
-import produce from 'immer';
+// Initial State
+const initialState = {
+	banksList: [{name:'ban'}],
+};
 
-export const {
-	Types: bankTypes,
-	Creators: bankActions
-} = createActions({
-	requestFetchBanks: null,
-	successFetchBanks: ['banks'],
-	failureFetchBanks: ['errorMessage']
-});
+  const bankReducer = (state = initialState, action) => {
 
-export const initialState = fromJS({
-	banks: {},
-	banksIsLoading: false,
-	banksErrorMessage: null
-});
+	switch (action.type) {
 
-export const fetchBanks = state =>
-	state.set('banksIsLoading', true).set('banksErrorMessage', null);
+		case 'ADD_BANK': {
+			const newBank = state.banksList.push(action.bankItem)
+			return {
+				...state,
+				banksList: newBank
+			}
+	  	}
 
-export const successFetchBanks = (state, { user }) =>
-	state
-		.set('banks', banks)
-		.set('banksIsLoading', false)
-		.set('banksErrorMessage', null);
-
-export const failureFetchBanks = (state, { errorMessage }) =>
-	state
-		.set('banks', {})
-		.set('banksIsLoading', false)
-		.set('banksErrorMessage', errorMessage);
-
-
-export const banksReducer = (state = initialState, action) =>
-	produce(state, () => {
-		switch (action.type) {
-			case bankTypes.REQUEST_FETCH_BANKS:
-				return fetchBanks(state, action);
-			case bankTypes.SUCCESS_FETCH_BANKS:
-				return successFetchBanks(state, action);
-			case bankTypes.FAILURE_FETCH_BANKS:
-				return failureFetchBanks(state, action);
-			default:
-				return state;
+	  	case 'REMOVE_BANK': {
+			const newList = state.banksList.filter(bank => bank.ifsc !== action.ifsc )
+			return {
+		  		...state,
+				banksList: newList
+			}
 		}
-	});
+		  
+	  	default: {
+			return state;
+	  	}
+	}
+  };
+
+  export default bankReducer;
