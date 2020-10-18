@@ -11,11 +11,12 @@ import { injectIntl } from 'react-intl';
 class FavBanks extends React.Component {
 
     componentDidMount() {
-		// this.getFavBanks()();
+		this.getFavBanks()();
 	}
 
 	getFavBanks = () => () => {
-		// this.props.fetchUser();
+        console.log('get list');
+		// this.props.fetchBanks();
     };
     
     render(){
