@@ -7,12 +7,12 @@ import { useNavigation } from 'react-navigation-hooks';
 
 const SearchBank = () => {
 	const [text, setText] = React.useState('');
-  const navigation = useNavigation();
+	const navigation = useNavigation();
 
-	const getBankDetails = () => {
-    // console.log(text);
-    // GetBankDetails(text);
-    navigation.navigate('BankInfo');
+	const getBankDetails = async () => {
+		// const result = await GetBankDetails(text.trim());
+		// console.log(result);
+		navigation.navigate('BankInfo');
 	};
 
 	return (
