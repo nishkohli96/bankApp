@@ -27,22 +27,22 @@ const BankDetails = () => {
     const [visible, setVisible] = React.useState(false);
     const [sbText, setsbText] = React.useState(null);
 
-	const [bankName, setBankName] = useState(BANKINFO.BANK);
-	const [bankCode, setBankCode] = useState(BANKINFO.BANKCODE);
-	const [ifsc, setIFSC] = useState(BANKINFO.IFSC);
-	const [branch, setBranch] = useState(BANKINFO.BRANCH);
-	const [address, setAddress] = useState(BANKINFO.ADDRESS);
-	const [contact, setContact] = useState(BANKINFO.CONTACT);
-	const [city, setCity] = useState(BANKINFO.CITY);
-	const [district, setDistrict] = useState(BANKINFO.DISTRICT);
-	const [state, setState] = useState(BANKINFO.STATE);
-	const [centre, setCentre] = useState(BANKINFO.CENTRE);
+	const [bankName] = useState(BANKINFO.BANK);
+	const [bankCode] = useState(BANKINFO.BANKCODE);
+	const [ifsc] = useState(BANKINFO.IFSC);
+	const [branch] = useState(BANKINFO.BRANCH);
+	const [address] = useState(BANKINFO.ADDRESS);
+	const [contact] = useState(BANKINFO.CONTACT);
+	const [city] = useState(BANKINFO.CITY);
+	const [district] = useState(BANKINFO.DISTRICT);
+	const [state] = useState(BANKINFO.STATE);
+	const [centre] = useState(BANKINFO.CENTRE);
 
-	const [imps, setIMPS] = useState(BANKINFO.IMPS);
-	const [micr, setMICR] = useState(BANKINFO.MICR);
-	const [upi, setUPI] = useState(BANKINFO.UPI);
-	const [rtgs, setRTGS] = useState(BANKINFO.RTGS);
-	const [neft, setNEFT] = useState(BANKINFO.NEFT);
+	const [imps] = useState(BANKINFO.IMPS);
+	const [micr] = useState(BANKINFO.MICR);
+	const [upi] = useState(BANKINFO.UPI);
+	const [rtgs] = useState(BANKINFO.RTGS);
+	const [neft] = useState(BANKINFO.NEFT);
 
 	const FavSelected = () => {
 		return <FontAwesome name="heart" size={30} color="pink" />;
