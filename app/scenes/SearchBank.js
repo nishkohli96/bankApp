@@ -10,14 +10,12 @@ const SearchBank = () => {
 	const navigation = useNavigation();
 
 	const getBankDetails = async () => {
-    const result = await GetBankDetails(text.trim());
-    
-    if(result.status === 200) {
-      navigation.navigate('BankInfo',{ bankData: result.data });
-    }
-    else {
+		const result = await GetBankDetails(text.trim());
 
-    }
+		if (result.status === 200) {
+			navigation.navigate('BankInfo', { bankData: result.data });
+		} else {
+		}
 	};
 
 	return (
