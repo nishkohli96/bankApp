@@ -4,18 +4,32 @@ import { TextInput } from 'react-native-paper';
 import ScreenHeader from '@atoms/ScreenHeader';
 import GetBankDetails from '@services/GetBankDetails';
 import { useNavigation } from 'react-navigation-hooks';
+import {useNetInfo} from "@react-native-community/netinfo";
 
 const SearchBank = () => {
-	const [text, setText] = React.useState('');
-	const navigation = useNavigation();
+  const navigation = useNavigation();
+  const netInfo = useNetInfo();
+  const [text, setText] = React.useState(null);
 
 	const getBankDetails = async () => {
-		const result = await GetBankDetails(text.trim());
+    if(text === null){
+      console.log('null text')
+      return false;
+    }
+    else if (!netInfo.isConnected){
+      console.log('no net')
+      return false;
+    } 
+    else {
+		  const result = await GetBankDetails(text.trim());
 
-		if (result.status === 200) {
-			navigation.navigate('BankInfo', { bankData: result.data });
-		} else {
-		}
+		  if (result.status === 200) {
+			  navigation.navigate('BankInfo', { bankData: result.data });
+      } 
+      else 
+      {
+      }
+    }
 	};
 
 	return (
