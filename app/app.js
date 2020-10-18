@@ -9,13 +9,13 @@ import { translationMessages } from './i18n';
 const { store, persistor } = createStore();
 
 const App = () => (
-  <Provider store={store}>
-    <LanguageProvider messages={translationMessages}>
-      <PersistGate loading={null} persistor={persistor}>
-        <RootScreen />
-      </PersistGate>
-    </LanguageProvider>
-  </Provider>
+	<Provider store={store}>
+		<LanguageProvider messages={translationMessages}>
+			<PersistGate loading={null} persistor={persistor}>
+				<RootScreen />
+			</PersistGate>
+		</LanguageProvider>
+	</Provider>
 );
 
 export default App;

@@ -6,49 +6,49 @@ import { fonts, images } from '@themes';
 import T from '@atoms/T';
 
 const styles = {
-  logoContainer: {
-    width: '100%',
-    height: 150,
-    marginBottom: 25
-  },
-  logo: {
-    width: '100%',
-    height: '100%',
-    alignSelf: 'center'
-  }
+	logoContainer: {
+		width: '100%',
+		height: 150,
+		marginBottom: 25
+	},
+	logo: {
+		width: '100%',
+		height: '100%',
+		alignSelf: 'center'
+	}
 };
 
 const TextBox = styled(T)`
-  ${fonts.style.standard()};
-  text-align: center;
-  margin-bottom: 5px;
+	${fonts.style.standard()};
+	text-align: center;
+	margin-bottom: 5px;
 `;
 
 const Instructions = styled(T)`
-  ${fonts.style.standard()};
-  text-align: center;
-  margin-bottom: 5;
-  font-style: italic;
+	${fonts.style.standard()};
+	text-align: center;
+	margin-bottom: 5;
+	font-style: italic;
 `;
 
 function LogoWithInstructions({ instructions }) {
-  return (
-    <>
-      <View style={styles.logoContainer}>
-        <Image
-          style={styles.logo}
-          source={images.wednesdayLogo}
-          resizeMode="contain"
-        />
-      </View>
-      <TextBox id="get_started" />
-      <Instructions text={instructions} />
-    </>
-  );
+	return (
+		<>
+			<View style={styles.logoContainer}>
+				<Image
+					style={styles.logo}
+					source={images.wednesdayLogo}
+					resizeMode="contain"
+				/>
+			</View>
+			<TextBox id="get_started" />
+			<Instructions text={instructions} />
+		</>
+	);
 }
 
 LogoWithInstructions.propTypes = {
-  instructions: PropTypes.string
+	instructions: PropTypes.string
 };
 
 export default LogoWithInstructions;

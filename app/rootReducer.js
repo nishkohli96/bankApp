@@ -4,9 +4,9 @@ import configureStore from 'app/utils/createStore';
 import rootSaga from 'app/rootSaga';
 
 export default () => {
-  const rootReducer = combineReducers({
-    example
-  });
+	const rootReducer = combineReducers({
+		example
+	});
 
-  return configureStore(rootReducer, rootSaga);
+	return configureStore(rootReducer, rootSaga);
 };

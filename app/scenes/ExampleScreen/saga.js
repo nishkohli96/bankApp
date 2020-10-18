@@ -10,19 +10,19 @@ import { exampleScreenActions, exampleScreenTypes } from './reducer';
  * Feel free to remove it.
  */
 export function* fetchUser() {
-  const response = yield call(getUser);
-  if (response.ok) {
-    const { data } = response;
-    yield put(exampleScreenActions.successFetchUser(get(data, '0')));
-  } else {
-    yield put(
-      exampleScreenActions.failureFetchUser(
-        'There was an error while fetching user informations.'
-      )
-    );
-  }
+	const response = yield call(getUser);
+	if (response.ok) {
+		const { data } = response;
+		yield put(exampleScreenActions.successFetchUser(get(data, '0')));
+	} else {
+		yield put(
+			exampleScreenActions.failureFetchUser(
+				'There was an error while fetching user informations.'
+			)
+		);
+	}
 }
 
 export default function* searchListContainerSaga() {
-  yield takeLatest(exampleScreenTypes.REQUEST_FETCH_USER, fetchUser);
+	yield takeLatest(exampleScreenTypes.REQUEST_FETCH_USER, fetchUser);
 }

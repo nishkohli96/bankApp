@@ -7,38 +7,38 @@ import CharacterWithQuote from '@molecules/CharacterWithQuote';
 import LogoWithInstructions from '@molecules/LogoWithInstructions';
 
 const Error = styled.Text`
-  ${fonts.style.standard()};
-  text-align: center;
-  margin-bottom: 5px;
-  color: red;
+	${fonts.style.standard()};
+	text-align: center;
+	margin-bottom: 5px;
+	color: red;
 `;
 
 const SeparatedView = styled.View`
-  > * {
-    margin: 10px;
-  }
+	> * {
+		margin: 10px;
+	}
 `;
 
 function SimpsonsLoveWednesday({ instructions, user, userErrorMessage }) {
-  return (
-    <>
-      <LogoWithInstructions instructions={instructions} />
-      <If
-        condition={!userErrorMessage}
-        otherwise={<Error>{userErrorMessage}</Error>}
-      >
-        <SeparatedView>
-          <CharacterWithQuote user={user} />
-        </SeparatedView>
-      </If>
-    </>
-  );
+	return (
+		<>
+			<LogoWithInstructions instructions={instructions} />
+			<If
+				condition={!userErrorMessage}
+				otherwise={<Error>{userErrorMessage}</Error>}
+			>
+				<SeparatedView>
+					<CharacterWithQuote user={user} />
+				</SeparatedView>
+			</If>
+		</>
+	);
 }
 
 SimpsonsLoveWednesday.propTypes = {
-  user: PropTypes.object,
-  instructions: PropTypes.string,
-  userErrorMessage: PropTypes.string
+	user: PropTypes.object,
+	instructions: PropTypes.string,
+	userErrorMessage: PropTypes.string
 };
 
 export default SimpsonsLoveWednesday;

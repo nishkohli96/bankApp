@@ -9,33 +9,33 @@ import { renderWithIntl } from '@utils/testUtils';
 import ConnectedLanguageProvider, { LanguageProvider } from '../index';
 
 describe('<LanguageProvider /> container tests', () => {
-  it('should render its children', () => {
-    const children = <h1>Test</h1>;
-    const container = renderWithIntl(
-      <LanguageProvider messages={translationMessages} locale="en">
-        {children}
-      </LanguageProvider>
-    );
-    expect(container.firstChild).not.toBeNull();
-  });
+	it('should render its children', () => {
+		const children = <h1>Test</h1>;
+		const container = renderWithIntl(
+			<LanguageProvider messages={translationMessages} locale="en">
+				{children}
+			</LanguageProvider>
+		);
+		expect(container.firstChild).not.toBeNull();
+	});
 });
 
 describe('<ConnectedLanguageProvider /> container tests', () => {
-  let reduxStore;
+	let reduxStore;
 
-  beforeAll(() => {
-    const { store } = createStore();
-    reduxStore = store;
-  });
+	beforeAll(() => {
+		const { store } = createStore();
+		reduxStore = store;
+	});
 
-  it('should render the default language messages', () => {
-    const { queryByText } = render(
-      <Provider store={reduxStore}>
-        <ConnectedLanguageProvider messages={translationMessages}>
-          <T id="because" />
-        </ConnectedLanguageProvider>
-      </Provider>
-    );
-    expect(queryByText('because')).not.toBeNull();
-  });
+	it('should render the default language messages', () => {
+		const { queryByText } = render(
+			<Provider store={reduxStore}>
+				<ConnectedLanguageProvider messages={translationMessages}>
+					<T id="because" />
+				</ConnectedLanguageProvider>
+			</Provider>
+		);
+		expect(queryByText('because')).not.toBeNull();
+	});
 });

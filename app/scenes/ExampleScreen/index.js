@@ -11,9 +11,9 @@ import AppContainer from '@atoms/Container';
 import SimpsonsLoveWednesday from '@organisms/SimpsonsLoveWednesday';
 
 import {
-  selectUser,
-  selectUserIsLoading,
-  selectUserErrorMessage
+	selectUser,
+	selectUserIsLoading,
+	selectUserErrorMessage
 } from './selectors';
 import { exampleScreenActions } from './reducer';
 
@@ -25,64 +25,71 @@ import { exampleScreenActions } from './reducer';
  */
 
 const Container = styled(AppContainer)`
-  margin: 30px;
-  flex: 1;
-  justify-content: center;
+	margin: 30px;
+	flex: 1;
+	justify-content: center;
 `;
 
 const CustomButton = styled.Button`
-  margin-top: 40px;
+	margin-top: 40px;
 `;
 const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\nCmd+D or shake for dev menu.',
-  android:
-    'Double tap R on your keyboard to reload,\nShake or press menu button for dev menu.'
+	ios: 'Press Cmd+R to reload,\nCmd+D or shake for dev menu.',
+	android:
+		'Double tap R on your keyboard to reload,\nShake or press menu button for dev menu.'
 });
 
 class ExampleScreen extends React.Component {
-  componentDidMount() {
-    this.requestFetchUser()();
-  }
+	componentDidMount() {
+		this.requestFetchUser()();
+	}
 
-  requestFetchUser = () => () => {
-    this.props.fetchUser();
-  };
+	requestFetchUser = () => () => {
+		this.props.fetchUser();
+	};
 
-  render() {
-    return (
-      <Container>
-        {this.props.userIsLoading ? (
-          <ActivityIndicator testID="loader" size="large" color="#0000ff" />
-        ) : (
-          <View testID="example-container-content">
-            <SimpsonsLoveWednesday
-              instructions={instructions}
-              userErrorMessage={this.props.userErrorMessage}
-              user={this.props.user}
-            />
-            <CustomButton onPress={this.requestFetchUser()} title="Refresh" />
-          </View>
-        )}
-      </Container>
-    );
-  }
+	render() {
+		return (
+			<Container>
+				{this.props.userIsLoading ? (
+					<ActivityIndicator
+						testID="loader"
+						size="large"
+						color="#0000ff"
+					/>
+				) : (
+					<View testID="example-container-content">
+						<SimpsonsLoveWednesday
+							instructions={instructions}
+							userErrorMessage={this.props.userErrorMessage}
+							user={this.props.user}
+						/>
+						<CustomButton
+							onPress={this.requestFetchUser()}
+							title="Refresh"
+						/>
+					</View>
+				)}
+			</Container>
+		);
+	}
 }
 
 ExampleScreen.propTypes = {
-  user: PropTypes.object,
-  userIsLoading: PropTypes.bool,
-  userErrorMessage: PropTypes.string,
-  fetchUser: PropTypes.func
+	user: PropTypes.object,
+	userIsLoading: PropTypes.bool,
+	userErrorMessage: PropTypes.string,
+	fetchUser: PropTypes.func
 };
 
 const mapStateToProps = createStructuredSelector({
-  user: selectUser(),
-  userIsLoading: selectUserIsLoading(),
-  userErrorMessage: selectUserErrorMessage()
+	user: selectUser(),
+	userIsLoading: selectUserIsLoading(),
+	userErrorMessage: selectUserErrorMessage()
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchUser: () => dispatch(exampleScreenActions.requestFetchUser())
+	fetchUser: () => dispatch(exampleScreenActions.requestFetchUser())
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
