@@ -9,12 +9,11 @@ import {
 } from 'react-native';
 import { AppLoading } from 'expo';
 import { useFonts } from 'expo-font';
-import { Divider } from 'react-native-paper';
+import { Divider, Snackbar } from 'react-native-paper';
 import ScreenHeader from '@atoms/ScreenHeader';
 import { useNavigation } from 'react-navigation-hooks';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import Constants from 'expo-constants';
 
 const BankDetails = () => {
 	const navigation = useNavigation();
@@ -23,7 +22,10 @@ const BankDetails = () => {
 	const [fontsLoaded] = useFonts({
 		'Piazzolla-Bold': require('@assets/fonts/Piazzolla-Bold.ttf'),
 		'Piazzolla-Light': require('@assets/fonts/Piazzolla-Light.ttf')
-	});
+    });
+    
+    const [visible, setVisible] = React.useState(false);
+    const [sbText, setsbText] = React.useState(null);
 
 	const [bankName, setBankName] = useState(BANKINFO.BANK);
 	const [bankCode, setBankCode] = useState(BANKINFO.BANKCODE);
@@ -51,7 +53,12 @@ const BankDetails = () => {
 	};
 
 	const setFavourite = () => {
-		setFav(fav => !fav);
+        setFav(fav => !fav);
+        const t1 = 'Bank added to Favourites';
+        const t2 = 'Bank removed from Favourites';
+        const text = fav ? t2: t1;
+        setVisible(true);
+        setsbText(text);
 	};
 
 	if (!fontsLoaded) {
@@ -223,6 +230,11 @@ const BankDetails = () => {
 						{fav ? <FavSelected /> : <FavNotSelected />}
 					</TouchableOpacity>
 				</View>
+
+                <Snackbar visible={visible} duration={2000} style={styles.snackBar} onDismiss={() => setVisible(false)}>
+                    {sbText}
+                </Snackbar>
+
 			</View>
 		</View>
 	);
@@ -274,7 +286,15 @@ const styles = StyleSheet.create({
 		bottom: 140,
 		borderRadius: 50,
 		padding: 15
-	}
+    },
+    snackBar: {
+        position: 'absolute',
+        bottom: 140,
+        backgroundColor: '#595959',
+        borderRadius: 10,
+        marginLeft: 70,
+        marginRight: 80
+    }
 });
 
 export default BankDetails;

@@ -13,7 +13,6 @@ const SearchBank = () => {
   
   const [visible, setVisible] = React.useState(false);
   const [sbText, setsbText] = React.useState(null);
-  const onDismissSnackBar = () => setVisible(false);
 
 	const getBankDetails = async () => {
     if(text === null){
