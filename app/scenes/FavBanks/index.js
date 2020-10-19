@@ -10,7 +10,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 class FavBanks extends React.Component {
 	BankItem = ({ bank }) => {
 		const nav = this.props.navigation;
-
+        console.log(this.props);
 		return (
 			<TouchableOpacity
 				onPress={() => nav.navigate('BankInfo', { bankData: bank })}
@@ -20,7 +20,7 @@ class FavBanks extends React.Component {
 						<Text style={styles.itemText}>{bank.ifsc}</Text>
 					</View>
 					<TouchableOpacity
-						onPress={() => console.log('btn pressed')}
+						onPress={() => this.props.deleteBank(bank)}
 					>
 						<View style={styles.deleteIcon}>
 							<MaterialCommunityIcons
@@ -79,7 +79,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-	fetchBanks: () => dispatch({ type: bankActions.getBanks, data: null })
+	deleteBank: bank => dispatch({ type: bankActions.deleteBank(), data: bank })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FavBanks);
