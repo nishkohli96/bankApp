@@ -12,7 +12,7 @@ export const initialState = fromJS({
 	banksList: [],
 });
 
-export const getBanks = state =>
+export const getBanks = (state, {action}) =>
 	state.set('banksList', []);
 
 export const addBank = (state, { action }) => {
@@ -30,9 +30,12 @@ export const deleteBank = (state, action) => {
 
 export const bankReducer = (state = initialState, action ) =>
   	produce(state, () => {
+		  console.log('action in reducer-------- ',action)
 	  	switch (action.type.type) {
-		  	case bankTypes.GET_BANKS:
-			  	return state
+		  	case bankTypes.GET_BANKS: {
+				  	console.log('in get bn -----------')
+					return state
+			  	}
 		  	case bankTypes.ADD_BANK:
 			  	{	
 					const newBank = [...state.get('banksList'), action.data];

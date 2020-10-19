@@ -13,7 +13,6 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { bankActions } from '@scenes/FavBanks/reducer';
-// import { addBank } from '../scenes/FavBanks/reducer';
 
 const FavSelected = () => {
 	return <FontAwesome name="heart" size={30} color="pink" />;
