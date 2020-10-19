@@ -1,42 +1,50 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button } from 'react-native';
 import { TextInput, Snackbar } from 'react-native-paper';
 import ScreenHeader from '@atoms/ScreenHeader';
 import GetBankDetails from '@services/GetBankDetails';
-import { useNavigation } from 'react-navigation-hooks';
-import { useNetInfo} from "@react-native-community/netinfo";
+import NetInfo from '@react-native-community/netinfo';
 
-const SearchBank = () => {
-  const navigation = useNavigation();
-  const netInfo = useNetInfo();
-  const [text, setText] = React.useState(null);
-  
-  const [visible, setVisible] = React.useState(false);
-  const [sbText, setsbText] = React.useState(null);
-
-	const getBankDetails = async () => {
-    if(text === null){
-      setVisible(true);
-      setsbText('Please enter something....')
+class SearchBank extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      text: null,
+      visible: false,
+      sbText: false
     }
-    else if (!netInfo.isConnected){
-      setVisible(true);
-      setsbText('No Internet Connection Detected')
+  }
+
+	getBankDetails = async () => {
+    if(this.state.text === null){
+      this.setState({ 
+        visible: true,
+        sbText:'Please enter something....'
+      });
+    }
+    else if (!NetInfo.isConnected){
+      this.setState({ 
+        visible: true,
+        sbText:'No Internet Connection Detected'
+      });
     } 
     else {
-		  const result = await GetBankDetails(text.trim());
+		  const result = await GetBankDetails(this.state.text.trim());
 
 		  if (result.status === 200) {
-			  navigation.navigate('BankInfo', { bankData: result.data });
+			  this.props.navigation.navigate('BankInfo', { bankData: result.data });
       } 
       else 
       {
-        setVisible(true);
-        setsbText('No Bank Info Found')
+        this.setState({ 
+          visible: true,
+          sbText:'No Bank Info Found'
+        });
       }
     }
-	};
-
+  };
+  
+render() {
 	return (
 		<View style={styles.container}>
 			<ScreenHeader title="Search Bank" />
@@ -44,13 +52,13 @@ const SearchBank = () => {
 				<TextInput
 					label="Enter IFSC Code"
 					underlineColor="#d1d156"
-					value={text}
-					onChangeText={text => setText(text)}
+					value={this.state.text}
+					onChangeText={ newText => this.setState({ text: newText })}
 					style={styles.textInput}
 				/>
 				<View style={styles.srchBtn}>
 					<Button
-						onPress={() => getBankDetails()}
+						onPress={() => this.getBankDetails()}
 						title="Search"
 						color="#d1d156"
 						accessibilityLabel="Search Bank"
@@ -58,11 +66,12 @@ const SearchBank = () => {
 				</View>
 			</View>
 
-      <Snackbar visible={visible} duration={2000} style={styles.snackBar} onDismiss={() => setVisible(false)}>
-        {sbText}
+      <Snackbar visible={this.state.visible} duration={2000} style={styles.snackBar} onDismiss={() => this.setState({ visible: false })}>
+        {this.state.sbText}
       </Snackbar>
 		</View>
-	);
+  );
+  }
 };
 
 const styles = StyleSheet.create({
