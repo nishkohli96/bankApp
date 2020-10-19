@@ -16,8 +16,6 @@ export const getBanks = state =>
 	state.set('banksList', []);
 
 export const addBank = (state, { action }) => {
-	console.log('reducer state ',state);
-	console.log('action in reducer ',action);
 	// const newBank = state.banksList.push(action.bankItem)
 	return state
 	  	.set('banksList', [])
@@ -30,15 +28,24 @@ export const deleteBank = (state, action) => {
 }
 
 
-export const bankReducer = (state = initialState, action) =>
+export const bankReducer = (state = initialState, action ) =>
   	produce(state, () => {
-	  	switch (action.type) {
+	  	switch (action.type.type) {
 		  	case bankTypes.GET_BANKS:
-			  	return getBanks(state, action);
+			  	return state
 		  	case bankTypes.ADD_BANK:
-			  	return addBank(state, action);
+			  	{	
+					const newBank = [...state.get('banksList'), action.data];
+					return state
+						.set('banksList', newBank)
+				}
 		  	case bankTypes.DELETE_BANK:
-			  	return deleteBank(state, action);
+			  	{
+					const newList = state.get('banksList')
+						.filter(bank => bank.ifsc !== action.ifsc );
+  					return state
+	  					.set('banksList', newList)
+				}
 		  	default:
 			  	return state;
 	  }

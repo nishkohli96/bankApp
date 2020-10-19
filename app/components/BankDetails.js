@@ -76,7 +76,6 @@ class BankDetails extends React.Component {
 			imps: this.state.imps,
 			upi: this.state.upi
 		};
-		// console.log(' in add fn ',this.props)
 		this.props.addBank(bankObj);
 	}
 
@@ -315,15 +314,13 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-    console.log(' state is ',state)
-    // return {}
     return {
       banksList : state.bank.banksList,
     };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    addBank: (obj) => dispatch(bankActions.addBank(obj))
+	addBank: (obj) =>  dispatch({type: bankActions.addBank(), data: obj}) 
 });
 
 
