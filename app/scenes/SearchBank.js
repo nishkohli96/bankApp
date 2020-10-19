@@ -15,6 +15,13 @@ class SearchBank extends React.Component {
     }
   }
 
+  componentDidMount(){
+    NetInfo.addEventListener(state => {
+      console.log("Connection type", state.type);
+      console.log("Is connected?", state.isConnected);
+    });
+  }
+
 	getBankDetails = async () => {
     if(this.state.text === null){
       this.setState({ 
@@ -22,7 +29,10 @@ class SearchBank extends React.Component {
         sbText:'Please enter something....'
       });
     }
-    else if (!NetInfo.isConnected){
+
+    const connected = (await NetInfo.fetch()).isConnected;
+    
+    if (!connected){
       this.setState({ 
         visible: true,
         sbText:'No Internet Connection Detected'
@@ -30,7 +40,7 @@ class SearchBank extends React.Component {
     } 
     else {
 		  const result = await GetBankDetails(this.state.text.trim());
-
+      console.log(result)
 		  if (result.status === 200) {
 			  this.props.navigation.navigate('BankInfo', { bankData: result.data });
       } 
