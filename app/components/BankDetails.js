@@ -23,198 +23,273 @@ const FavNotSelected = () => {
 };
 
 class BankDetails extends React.Component {
-
-	constructor(props){
-		console.log('props r ',props)
+	constructor(props) {
 		super(props);
 		this.state = {
 			fav: false,
 			visible: false,
 			sbText: 'Bank added to Favourites'
+		};
+	}
+
+	setFavourite() {
+		if (!this.state.fav) {
+			this.setState({ fav: true });
+			const bankObj = this.props.navigation.state.params.bankData;
+			this.props.addBank(bankObj);
 		}
 	}
 
-	setFavourite()  {
-		const bankObj = this.props.navigation.state.params.bankData;
-		this.props.addBank(bankObj);
-	}
-
-render() {
-	return (
-		<View>
-			<ScreenHeader title="Bank Details" />
-			<View style={styles.body}>
-				<SafeAreaView style={styles.safeArea}>
-					<ScrollView>
-						<View style={styles.desc}>
-							<View style={styles.keyView}>
-								<Text style={styles.key}>Name : </Text>
-							</View>
-							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.props.navigation.state.params.bankData.bankName}</Text>
-							</View>
-						</View>
-
-						<View style={styles.desc}>
-							<View style={styles.keyView}>
-								<Text style={styles.key}>Code : </Text>
-							</View>
-							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.props.navigation.state.params.bankData.bankCode}</Text>
-							</View>
-						</View>
-
-						<View style={styles.desc}>
-							<View style={styles.keyView}>
-								<Text style={styles.key}>IFSC : </Text>
-							</View>
-							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.props.navigation.state.params.bankData.ifsc}</Text>
-							</View>
-						</View>
-
-						<View style={styles.desc}>
-							<View style={styles.keyView}>
-								<Text style={styles.key}>Branch : </Text>
-							</View>
-							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.props.navigation.state.params.bankData.branch}</Text>
-							</View>
-						</View>
-
-						<View style={styles.desc}>
-							<View style={styles.keyView}>
-								<Text style={styles.key}>Address : </Text>
-							</View>
-							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.props.navigation.state.params.bankData.address}</Text>
-							</View>
-						</View>
-
-						<View style={styles.desc}>
-							<View style={styles.keyView}>
-								<Text style={styles.key}>Contact : </Text>
-							</View>
-							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.props.navigation.state.params.bankData.contact}</Text>
-							</View>
-						</View>
-
-						<View style={styles.desc}>
-							<View style={styles.keyView}>
-								<Text style={styles.key}>City : </Text>
-							</View>
-							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.props.navigation.state.params.bankData.city}</Text>
-							</View>
-						</View>
-
-						<View style={styles.desc}>
-							<View style={styles.keyView}>
-								<Text style={styles.key}>District : </Text>
-							</View>
-							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.props.navigation.state.params.bankData.district}</Text>
-							</View>
-						</View>
-
-						<View style={styles.desc}>
-							<View style={styles.keyView}>
-								<Text style={styles.key}>Centre : </Text>
-							</View>
-							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.props.navigation.state.params.bankData.centre}</Text>
-							</View>
-						</View>
-
-						<View style={styles.desc}>
-							<View style={styles.keyView}>
-								<Text style={styles.key}>State : </Text>
-							</View>
-							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.props.navigation.state.params.bankData.state}</Text>
-							</View>
-						</View>
-						<Divider />
-
-						<View style={styles.paymentView}>
-							<View style={{ marginBottom: 20 }}>
-								<Text style={styles.key}> Payment Methods</Text>
-							</View>
-
+	render() {
+		return (
+			<View>
+				<ScreenHeader title="Bank Details" />
+				<View style={styles.body}>
+					<SafeAreaView style={styles.safeArea}>
+						<ScrollView>
 							<View style={styles.desc}>
 								<View style={styles.keyView}>
-									<Text style={styles.key}>RTGS : </Text>
+									<Text style={styles.key}>Name : </Text>
 								</View>
 								<View style={styles.valueView}>
 									<Text style={styles.value}>
-										{this.props.navigation.state.params.bankData.rtgs ? 'Yes' : 'No'}
+										{
+											this.props.navigation.state.params
+												.bankData.bankName
+										}
 									</Text>
 								</View>
 							</View>
 
 							<View style={styles.desc}>
 								<View style={styles.keyView}>
-									<Text style={styles.key}>NEFT : </Text>
+									<Text style={styles.key}>Code : </Text>
 								</View>
 								<View style={styles.valueView}>
 									<Text style={styles.value}>
-										{this.props.navigation.state.params.bankData.neft ? 'Yes' : 'No'}
+										{
+											this.props.navigation.state.params
+												.bankData.bankCode
+										}
 									</Text>
 								</View>
 							</View>
 
 							<View style={styles.desc}>
 								<View style={styles.keyView}>
-									<Text style={styles.key}>MICR : </Text>
+									<Text style={styles.key}>IFSC : </Text>
 								</View>
 								<View style={styles.valueView}>
 									<Text style={styles.value}>
-										{this.props.navigation.state.params.bankData.micr ? 'Yes' : 'No'}
+										{
+											this.props.navigation.state.params
+												.bankData.ifsc
+										}
 									</Text>
 								</View>
 							</View>
 
 							<View style={styles.desc}>
 								<View style={styles.keyView}>
-									<Text style={styles.key}>IMPS : </Text>
+									<Text style={styles.key}>Branch : </Text>
 								</View>
 								<View style={styles.valueView}>
 									<Text style={styles.value}>
-										{this.props.navigation.state.params.bankData.imps ? 'Yes' : 'No'}
+										{
+											this.props.navigation.state.params
+												.bankData.branch
+										}
 									</Text>
 								</View>
 							</View>
 
 							<View style={styles.desc}>
 								<View style={styles.keyView}>
-									<Text style={styles.key}>UPI : </Text>
+									<Text style={styles.key}>Address : </Text>
 								</View>
 								<View style={styles.valueView}>
 									<Text style={styles.value}>
-										{this.props.navigation.state.params.bankData.upi ? 'Yes' : 'No'}
+										{
+											this.props.navigation.state.params
+												.bankData.address
+										}
 									</Text>
 								</View>
 							</View>
-						</View>
-					</ScrollView>
-				</SafeAreaView>
 
-				<View style={styles.fabView}>
-					<TouchableOpacity onPress={this.setFavourite.bind(this)}>
-						{this.state.fav ? FavSelected() : FavNotSelected() }
-					</TouchableOpacity>
+							<View style={styles.desc}>
+								<View style={styles.keyView}>
+									<Text style={styles.key}>Contact : </Text>
+								</View>
+								<View style={styles.valueView}>
+									<Text style={styles.value}>
+										{
+											this.props.navigation.state.params
+												.bankData.contact
+										}
+									</Text>
+								</View>
+							</View>
+
+							<View style={styles.desc}>
+								<View style={styles.keyView}>
+									<Text style={styles.key}>City : </Text>
+								</View>
+								<View style={styles.valueView}>
+									<Text style={styles.value}>
+										{
+											this.props.navigation.state.params
+												.bankData.city
+										}
+									</Text>
+								</View>
+							</View>
+
+							<View style={styles.desc}>
+								<View style={styles.keyView}>
+									<Text style={styles.key}>District : </Text>
+								</View>
+								<View style={styles.valueView}>
+									<Text style={styles.value}>
+										{
+											this.props.navigation.state.params
+												.bankData.district
+										}
+									</Text>
+								</View>
+							</View>
+
+							<View style={styles.desc}>
+								<View style={styles.keyView}>
+									<Text style={styles.key}>Centre : </Text>
+								</View>
+								<View style={styles.valueView}>
+									<Text style={styles.value}>
+										{
+											this.props.navigation.state.params
+												.bankData.centre
+										}
+									</Text>
+								</View>
+							</View>
+
+							<View style={styles.desc}>
+								<View style={styles.keyView}>
+									<Text style={styles.key}>State : </Text>
+								</View>
+								<View style={styles.valueView}>
+									<Text style={styles.value}>
+										{
+											this.props.navigation.state.params
+												.bankData.state
+										}
+									</Text>
+								</View>
+							</View>
+							<Divider />
+
+							<View style={styles.paymentView}>
+								<View style={{ marginBottom: 20 }}>
+									<Text style={styles.key}>
+										{' '}
+										Payment Methods
+									</Text>
+								</View>
+
+								<View style={styles.desc}>
+									<View style={styles.keyView}>
+										<Text style={styles.key}>RTGS : </Text>
+									</View>
+									<View style={styles.valueView}>
+										<Text style={styles.value}>
+											{this.props.navigation.state.params
+												.bankData.rtgs
+												? 'Yes'
+												: 'No'}
+										</Text>
+									</View>
+								</View>
+
+								<View style={styles.desc}>
+									<View style={styles.keyView}>
+										<Text style={styles.key}>NEFT : </Text>
+									</View>
+									<View style={styles.valueView}>
+										<Text style={styles.value}>
+											{this.props.navigation.state.params
+												.bankData.neft
+												? 'Yes'
+												: 'No'}
+										</Text>
+									</View>
+								</View>
+
+								<View style={styles.desc}>
+									<View style={styles.keyView}>
+										<Text style={styles.key}>MICR : </Text>
+									</View>
+									<View style={styles.valueView}>
+										<Text style={styles.value}>
+											{this.props.navigation.state.params
+												.bankData.micr
+												? 'Yes'
+												: 'No'}
+										</Text>
+									</View>
+								</View>
+
+								<View style={styles.desc}>
+									<View style={styles.keyView}>
+										<Text style={styles.key}>IMPS : </Text>
+									</View>
+									<View style={styles.valueView}>
+										<Text style={styles.value}>
+											{this.props.navigation.state.params
+												.bankData.imps
+												? 'Yes'
+												: 'No'}
+										</Text>
+									</View>
+								</View>
+
+								<View style={styles.desc}>
+									<View style={styles.keyView}>
+										<Text style={styles.key}>UPI : </Text>
+									</View>
+									<View style={styles.valueView}>
+										<Text style={styles.value}>
+											{this.props.navigation.state.params
+												.bankData.upi
+												? 'Yes'
+												: 'No'}
+										</Text>
+									</View>
+								</View>
+							</View>
+						</ScrollView>
+					</SafeAreaView>
+
+					<View style={styles.fabView}>
+						<TouchableOpacity
+							onPress={this.setFavourite.bind(this)}
+						>
+							{this.state.fav ? FavSelected() : FavNotSelected()}
+						</TouchableOpacity>
+					</View>
+
+					<Snackbar
+						visible={this.state.visible}
+						duration={2000}
+						style={styles.snackBar}
+						onDismiss={() => this.setState({ visible: false })}
+					>
+						{this.state.sbText}
+					</Snackbar>
 				</View>
-
-                <Snackbar visible={this.state.visible} duration={2000} style={styles.snackBar} onDismiss={() => this.setState({visible: false})}>
-                    {this.state.sbText}
-                </Snackbar>
-
 			</View>
-		</View>
-	);
+		);
+	}
 }
-};
 
 const styles = StyleSheet.create({
 	body: {
@@ -262,26 +337,25 @@ const styles = StyleSheet.create({
 		bottom: 140,
 		borderRadius: 50,
 		padding: 15
-    },
-    snackBar: {
-        position: 'absolute',
-        bottom: 140,
-        backgroundColor: '#595959',
-        borderRadius: 10,
-        marginLeft: 70,
-        marginRight: 80
-    }
+	},
+	snackBar: {
+		position: 'absolute',
+		bottom: 140,
+		backgroundColor: '#595959',
+		borderRadius: 10,
+		marginLeft: 70,
+		marginRight: 80
+	}
 });
 
-const mapStateToProps = (state) => {
-    return {
-      banksList : state.bank.banksList,
-    };
+const mapStateToProps = state => {
+	return {
+		banksList: state.bank.banksList
+	};
 };
 
-const mapDispatchToProps = (dispatch) => ({
-	addBank: (obj) =>  dispatch({type: bankActions.addBank(), data: obj}) 
+const mapDispatchToProps = dispatch => ({
+	addBank: obj => dispatch({ type: bankActions.addBank(), data: obj })
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(BankDetails);
