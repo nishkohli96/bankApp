@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import ScreenHeader from '@atoms/ScreenHeader';
 import { connect } from 'react-redux';
 import { bankActions } from './reducer';
@@ -9,9 +9,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 class FavBanks extends React.Component {
 	BankItem = ({ bank }) => {
+
 		const nav = this.props.navigation;
-        console.log(this.props);
-		return (
+
+        return (
 			<TouchableOpacity
 				onPress={() => nav.navigate('BankInfo', { bankData: bank })}
 			>
@@ -37,12 +38,16 @@ class FavBanks extends React.Component {
 
 	render() {
 		return (
-			<View>
+			<View style={styles.container}>
 				<ScreenHeader title="Favourites" />
 				<View style={styles.body}>
-					{this.props.bankList.map(bank => (
-						<this.BankItem key={bank.ifsc} bank={bank} />
-					))}
+                    <SafeAreaView style={styles.safeArea}>
+						<ScrollView>
+					        {this.props.bankList.map(bank => (
+						        <this.BankItem key={bank.ifsc} bank={bank} />
+					        ))}
+                        </ScrollView>
+                    </SafeAreaView>
 				</View>
 			</View>
 		);
@@ -50,8 +55,13 @@ class FavBanks extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        marginBottom: 100
+    },
 	body: {
-		padding: 30
+        padding: 30,
+        paddingRight: 0,
+		marginBottom: 30
 	},
 	itemRow: {
 		display: 'flex',
@@ -59,7 +69,8 @@ const styles = StyleSheet.create({
 		height: 60,
 		padding: 15,
 		backgroundColor: 'beige',
-		marginBottom: 20
+        marginBottom: 20,
+        marginRight: 30
 	},
 	itemView: {
 		flex: 1

@@ -13,6 +13,8 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { bankActions } from '@scenes/FavBanks/reducer';
+import { getBanks } from '@scenes/FavBanks/selectors';
+import { createStructuredSelector } from 'reselect';
 
 const FavSelected = () => {
 	return <FontAwesome name="heart" size={30} color="pink" />;
@@ -28,13 +30,23 @@ class BankDetails extends React.Component {
 		this.state = {
 			fav: false,
 			visible: false,
-			sbText: 'Bank added to Favourites'
+			sbText: null
 		};
 	}
 
 	setFavourite() {
-		if (!this.state.fav) {
-			this.setState({ fav: true });
+		if(this.props.bankList.length >= 10){
+			this.setState({ 
+				visible: true,
+				sbText: 'Max 10 Entries can be saved' 
+			});
+		} 
+		else if (!this.state.fav) {
+			this.setState({ 
+				fav: true,
+				visible: true,
+				sbText: 'Bank added to Favourites'
+			});
 			const bankObj = this.props.navigation.state.params.bankData;
 			this.props.addBank(bankObj);
 		}
@@ -348,11 +360,9 @@ const styles = StyleSheet.create({
 	}
 });
 
-const mapStateToProps = state => {
-	return {
-		banksList: state.bank.banksList
-	};
-};
+const mapStateToProps = createStructuredSelector({
+	bankList: getBanks()
+});
 
 const mapDispatchToProps = dispatch => ({
 	addBank: obj => dispatch({ type: bankActions.addBank(), data: obj })

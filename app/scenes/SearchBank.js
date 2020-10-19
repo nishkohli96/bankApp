@@ -23,11 +23,13 @@ class SearchBank extends React.Component {
 	}
 
 	getBankDetails = async () => {
+
 		if (this.state.text === null) {
 			this.setState({
 				visible: true,
 				sbText: 'Please enter something....'
 			});
+			return;
 		}
 
 		const connected = (await NetInfo.fetch()).isConnected;
@@ -37,9 +39,10 @@ class SearchBank extends React.Component {
 				visible: true,
 				sbText: 'No Internet Connection Detected'
 			});
+			return;
 		} else {
 			const result = await GetBankDetails(this.state.text.trim());
-
+			
 			if (result.status === 200) {
 				const bankObj = {
 					bankName: result.data.BANK,
@@ -60,6 +63,11 @@ class SearchBank extends React.Component {
 				};
 				this.props.navigation.navigate('BankInfo', {
 					bankData: bankObj
+				});
+				this.setState({
+					text: null,
+					visible: false,
+					sbText: false
 				});
 			} else {
 				this.setState({
