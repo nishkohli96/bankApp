@@ -25,57 +25,17 @@ const FavNotSelected = () => {
 class BankDetails extends React.Component {
 
 	constructor(props){
+		console.log('props r ',props)
 		super(props);
-		const BANKINFO = this.props.navigation.state.params.bankData;
-		console.log('info ',BANKINFO);
-		this.state= {
+		this.state = {
 			fav: false,
 			visible: false,
-			sbText: null,
-			bankName: BANKINFO.BANK,
-			bankCode: BANKINFO.BANKCODE,
-			ifsc: BANKINFO.IFSC,
-			branch: BANKINFO.BRANCH,
-			address: BANKINFO.ADDRESS,
-			contact: BANKINFO.CONTACT,
-			city: BANKINFO.CITY,
-			district: BANKINFO.DISTRICT,
-			state: BANKINFO.STATE,
-			centre: BANKINFO.CENTRE,
-			imps: BANKINFO.IMPS,
-			micr: BANKINFO.MICR,
-			upi: BANKINFO.UPI,
-			rtgs: BANKINFO.RTGS,
-			neft: BANKINFO.NEFT
+			sbText: 'Bank added to Favourites'
 		}
 	}
 
 	setFavourite()  {
-		// setFav(fav => !fav);
-		this.setState({fav: !this.state.fav})
-        const t1 = 'Bank added to Favourites';
-        const t2 = 'Bank removed from Favourites';
-        // const text = fav ? t2: t1;
-        // setVisible(true);
-		// setsbText(text);
-		
-		const bankObj = {
-			bankName: this.state.bankName,
-			bankCode: this.state.bankCode,
-			ifsc: this.state.ifsc,
-			branch: this.state.branch,
-			address: this.state.address,
-			contact: this.state.contact,
-			city: this.state.city,
-			district: this.state.district,
-			center: this.state.centre,
-			state: this.state.state,
-			rtgs: this.state.rtgs,
-			neft: this.state.neft,
-			micr: this.state.micr,
-			imps: this.state.imps,
-			upi: this.state.upi
-		};
+		const bankObj = this.props.navigation.state.params.bankData;
 		this.props.addBank(bankObj);
 	}
 
@@ -91,7 +51,7 @@ render() {
 								<Text style={styles.key}>Name : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.state.bankName}</Text>
+								<Text style={styles.value}>{this.props.navigation.state.params.bankData.bankName}</Text>
 							</View>
 						</View>
 
@@ -100,7 +60,7 @@ render() {
 								<Text style={styles.key}>Code : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.state.bankCode}</Text>
+								<Text style={styles.value}>{this.props.navigation.state.params.bankData.bankCode}</Text>
 							</View>
 						</View>
 
@@ -109,7 +69,7 @@ render() {
 								<Text style={styles.key}>IFSC : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.state.ifsc}</Text>
+								<Text style={styles.value}>{this.props.navigation.state.params.bankData.ifsc}</Text>
 							</View>
 						</View>
 
@@ -118,7 +78,7 @@ render() {
 								<Text style={styles.key}>Branch : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.state.branch}</Text>
+								<Text style={styles.value}>{this.props.navigation.state.params.bankData.branch}</Text>
 							</View>
 						</View>
 
@@ -127,7 +87,7 @@ render() {
 								<Text style={styles.key}>Address : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.state.address}</Text>
+								<Text style={styles.value}>{this.props.navigation.state.params.bankData.address}</Text>
 							</View>
 						</View>
 
@@ -136,7 +96,7 @@ render() {
 								<Text style={styles.key}>Contact : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.state.contact}</Text>
+								<Text style={styles.value}>{this.props.navigation.state.params.bankData.contact}</Text>
 							</View>
 						</View>
 
@@ -145,7 +105,7 @@ render() {
 								<Text style={styles.key}>City : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.state.city}</Text>
+								<Text style={styles.value}>{this.props.navigation.state.params.bankData.city}</Text>
 							</View>
 						</View>
 
@@ -154,7 +114,7 @@ render() {
 								<Text style={styles.key}>District : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.state.district}</Text>
+								<Text style={styles.value}>{this.props.navigation.state.params.bankData.district}</Text>
 							</View>
 						</View>
 
@@ -163,7 +123,7 @@ render() {
 								<Text style={styles.key}>Centre : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.state.centre}</Text>
+								<Text style={styles.value}>{this.props.navigation.state.params.bankData.centre}</Text>
 							</View>
 						</View>
 
@@ -172,7 +132,7 @@ render() {
 								<Text style={styles.key}>State : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{this.state.state}</Text>
+								<Text style={styles.value}>{this.props.navigation.state.params.bankData.state}</Text>
 							</View>
 						</View>
 						<Divider />
@@ -188,7 +148,7 @@ render() {
 								</View>
 								<View style={styles.valueView}>
 									<Text style={styles.value}>
-										{this.state.rtgs ? 'Yes' : 'No'}
+										{this.props.navigation.state.params.bankData.rtgs ? 'Yes' : 'No'}
 									</Text>
 								</View>
 							</View>
@@ -199,7 +159,7 @@ render() {
 								</View>
 								<View style={styles.valueView}>
 									<Text style={styles.value}>
-										{this.state.neft ? 'Yes' : 'No'}
+										{this.props.navigation.state.params.bankData.neft ? 'Yes' : 'No'}
 									</Text>
 								</View>
 							</View>
@@ -210,7 +170,7 @@ render() {
 								</View>
 								<View style={styles.valueView}>
 									<Text style={styles.value}>
-										{this.state.micr ? 'Yes' : 'No'}
+										{this.props.navigation.state.params.bankData.micr ? 'Yes' : 'No'}
 									</Text>
 								</View>
 							</View>
@@ -221,7 +181,7 @@ render() {
 								</View>
 								<View style={styles.valueView}>
 									<Text style={styles.value}>
-										{this.state.imps ? 'Yes' : 'No'}
+										{this.props.navigation.state.params.bankData.imps ? 'Yes' : 'No'}
 									</Text>
 								</View>
 							</View>
@@ -232,7 +192,7 @@ render() {
 								</View>
 								<View style={styles.valueView}>
 									<Text style={styles.value}>
-										{this.state.upi ? 'Yes' : 'No'}
+										{this.props.navigation.state.params.bankData.upi ? 'Yes' : 'No'}
 									</Text>
 								</View>
 							</View>
