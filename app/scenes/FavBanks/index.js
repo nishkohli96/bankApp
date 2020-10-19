@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import ScreenHeader from '@atoms/ScreenHeader';
 import { connect } from 'react-redux';
+import { bankActions } from './reducer';
+
 import { compose } from 'redux';
 import { PropTypes } from 'prop-types';
 
@@ -16,8 +18,7 @@ class FavBanks extends React.Component {
 
 	getFavBanks = () => () => {
         console.log('get list');
-        console.log(this.state);
-		// this.props.fetchBanks();
+		this.props.fetchBanks();
     };
     
     render(){
@@ -32,17 +33,15 @@ class FavBanks extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.bank)
-    return {
-      banksList : state.bank.banksList,
-    };
+    console.log(state)
+    return {}
+    // return {
+    //   banksList : state.bank.banksList,
+    // };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-      reduxIncreaseCounter: () => console.log('inc'),
-      reduxDecreaseCounter: () => console.log('dec'),
-    };
-};
+const mapDispatchToProps = (dispatch) => ({
+    fetchBanks: () => dispatch(bankActions.getBanks())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(FavBanks);
