@@ -9,16 +9,18 @@ export const { Types: bankTypes, Creators: bankActions } = createActions({
 });
 
 export const initialState = fromJS({
-	banksList: [{name:'ban'}],
+	banksList: [],
 });
 
 export const getBanks = state =>
-	state.set('banksList', initialState.banksList);
+	state.set('banksList', []);
 
-export const addBank = (state, action) => {
-	const newBank = state.banksList.push(action.bankItem)
+export const addBank = (state, { action }) => {
+	console.log('state ',state);
+	console.log('action ',action);
+	// const newBank = state.banksList.push(action.bankItem)
 	return state
-	  	.set('banksList', newBank)
+	  	.set('banksList', [])
 }
 
 export const deleteBank = (state, action) => {

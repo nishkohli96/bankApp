@@ -14,6 +14,9 @@ import ScreenHeader from '@atoms/ScreenHeader';
 import { useNavigation } from 'react-navigation-hooks';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import { connect } from 'react-redux';
+import { bankActions } from '@scenes/FavBanks/reducer';
+import { addBank } from '../scenes/FavBanks/reducer';
 
 const BankDetails = () => {
 	const navigation = useNavigation();
@@ -77,7 +80,8 @@ const BankDetails = () => {
 			imps,
 			upi
 		};
-		console.log(bankObj)
+		console.log(this.props)
+		// addBank(this.state,bankObj);
 	};
 
 	if (!fontsLoaded) {
@@ -316,4 +320,17 @@ const styles = StyleSheet.create({
     }
 });
 
-export default BankDetails;
+const mapStateToProps = (state) => {
+    console.log(' state is ',state)
+    // return {}
+    return {
+      banksList : state.bank.banksList,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    addBank: (obj) => dispatch(bankActions.addBank(obj))
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(BankDetails);

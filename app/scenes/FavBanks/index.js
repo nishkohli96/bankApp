@@ -4,12 +4,6 @@ import ScreenHeader from '@atoms/ScreenHeader';
 import { connect } from 'react-redux';
 import { bankActions } from './reducer';
 
-import { compose } from 'redux';
-import { PropTypes } from 'prop-types';
-
-import { createStructuredSelector } from 'reselect';
-import { injectIntl } from 'react-intl';
-
 class FavBanks extends React.Component {
 
     componentDidMount() {
@@ -33,7 +27,7 @@ class FavBanks extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
+    console.log(' state is ',state)
     return {}
     // return {
     //   banksList : state.bank.banksList,
