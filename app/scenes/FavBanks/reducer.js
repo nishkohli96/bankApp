@@ -16,8 +16,8 @@ export const getBanks = state =>
 	state.set('banksList', []);
 
 export const addBank = (state, { action }) => {
-	console.log('state ',state);
-	console.log('action ',action);
+	console.log('reducer state ',state);
+	console.log('action in reducer ',action);
 	// const newBank = state.banksList.push(action.bankItem)
 	return state
 	  	.set('banksList', [])

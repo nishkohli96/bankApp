@@ -13,7 +13,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { bankActions } from '@scenes/FavBanks/reducer';
-import { addBank } from '../scenes/FavBanks/reducer';
+// import { addBank } from '../scenes/FavBanks/reducer';
 
 const FavSelected = () => {
 	return <FontAwesome name="heart" size={30} color="pink" />;
@@ -50,34 +50,35 @@ class BankDetails extends React.Component {
 		}
 	}
 
-	setFavourite = () => () => {
-        // setFav(fav => !fav);
+	setFavourite()  {
+		// setFav(fav => !fav);
+		this.setState({fav: !this.state.fav})
         const t1 = 'Bank added to Favourites';
         const t2 = 'Bank removed from Favourites';
-        const text = fav ? t2: t1;
+        // const text = fav ? t2: t1;
         // setVisible(true);
 		// setsbText(text);
 		
 		const bankObj = {
-			bankName,
-			bankCode,
-			ifsc,
-			branch,
-			address,
-			contact,
-			city,
-			district,
-			centre,
-			state,
-			rtgs,
-			neft,
-			micr,
-			imps,
-			upi
+			bankName: this.state.bankName,
+			bankCode: this.state.bankCode,
+			ifsc: this.state.ifsc,
+			branch: this.state.branch,
+			address: this.state.address,
+			contact: this.state.contact,
+			city: this.state.city,
+			district: this.state.district,
+			center: this.state.centre,
+			state: this.state.state,
+			rtgs: this.state.rtgs,
+			neft: this.state.neft,
+			micr: this.state.micr,
+			imps: this.state.imps,
+			upi: this.state.upi
 		};
-		console.log(this.props)
-		// addBank(this.state,bankObj);
-	};
+		// console.log(' in add fn ',this.props)
+		this.props.addBank(bankObj);
+	}
 
 render() {
 	return (
@@ -241,7 +242,7 @@ render() {
 				</SafeAreaView>
 
 				<View style={styles.fabView}>
-					<TouchableOpacity onPress={() => this.setState({fav: !this.state.fav})}>
+					<TouchableOpacity onPress={this.setFavourite.bind(this)}>
 						{this.state.fav ? FavSelected() : FavNotSelected() }
 					</TouchableOpacity>
 				</View>
