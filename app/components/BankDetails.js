@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
 	StyleSheet,
 	View,
@@ -7,61 +7,56 @@ import {
 	SafeAreaView,
 	ScrollView
 } from 'react-native';
-import { AppLoading } from 'expo';
-import { useFonts } from 'expo-font';
 import { Divider, Snackbar } from 'react-native-paper';
 import ScreenHeader from '@atoms/ScreenHeader';
-import { useNavigation } from 'react-navigation-hooks';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { bankActions } from '@scenes/FavBanks/reducer';
 import { addBank } from '../scenes/FavBanks/reducer';
 
-const BankDetails = () => {
-	const navigation = useNavigation();
-	const BANKINFO = navigation.state.params.bankData;
-	const [fav, setFav] = useState(false);
-	const [fontsLoaded] = useFonts({
-		'Piazzolla-Bold': require('@assets/fonts/Piazzolla-Bold.ttf'),
-		'Piazzolla-Light': require('@assets/fonts/Piazzolla-Light.ttf')
-    });
-    
-    const [visible, setVisible] = React.useState(false);
-    const [sbText, setsbText] = React.useState(null);
+const FavSelected = () => {
+	return <FontAwesome name="heart" size={30} color="pink" />;
+};
 
-	const [bankName] = useState(BANKINFO.BANK);
-	const [bankCode] = useState(BANKINFO.BANKCODE);
-	const [ifsc] = useState(BANKINFO.IFSC);
-	const [branch] = useState(BANKINFO.BRANCH);
-	const [address] = useState(BANKINFO.ADDRESS);
-	const [contact] = useState(BANKINFO.CONTACT);
-	const [city] = useState(BANKINFO.CITY);
-	const [district] = useState(BANKINFO.DISTRICT);
-	const [state] = useState(BANKINFO.STATE);
-	const [centre] = useState(BANKINFO.CENTRE);
+const FavNotSelected = () => {
+	return <FontAwesome5 name="heart" size={30} color="pink" />;
+};
 
-	const [imps] = useState(BANKINFO.IMPS);
-	const [micr] = useState(BANKINFO.MICR);
-	const [upi] = useState(BANKINFO.UPI);
-	const [rtgs] = useState(BANKINFO.RTGS);
-	const [neft] = useState(BANKINFO.NEFT);
+class BankDetails extends React.Component {
 
-	const FavSelected = () => {
-		return <FontAwesome name="heart" size={30} color="pink" />;
-	};
+	constructor(props){
+		super(props);
+		const BANKINFO = this.props.navigation.state.params.bankData;
+		this.state= {
+			fav: false,
+			visible: false,
+			sbText: null,
+			bankName: BANKINFO.BANK,
+			bankCode: BANKINFO.BANKCODE,
+			ifsc: BANKINFO.IFSC,
+			branch: BANKINFO.BRANCH,
+			address: BANKINFO.ADDRESS,
+			contact: BANKINFO.CONTACT,
+			city: BANKINFO.CITY,
+			district: BANKINFO.DISTRICT,
+			state: BANKINFO.STATE,
+			centre: BANKINFO.CENTRE,
+			imps: BANKINFO.IMPS,
+			micr: BANKINFO.MICR,
+			upi: BANKINFO.UPI,
+			rtgs: BANKINFO.RTGS,
+			neft: BANKINFO.NEFT
+		}
+	}
 
-	const FavNotSelected = () => {
-		return <FontAwesome5 name="heart" size={30} color="pink" />;
-	};
-
-	const setFavourite = () => {
-        setFav(fav => !fav);
+	setFavourite = () => () => {
+        // setFav(fav => !fav);
         const t1 = 'Bank added to Favourites';
         const t2 = 'Bank removed from Favourites';
         const text = fav ? t2: t1;
-        setVisible(true);
-		setsbText(text);
+        // setVisible(true);
+		// setsbText(text);
 		
 		const bankObj = {
 			bankName,
@@ -84,10 +79,7 @@ const BankDetails = () => {
 		// addBank(this.state,bankObj);
 	};
 
-	if (!fontsLoaded) {
-		return <AppLoading />;
-	}
-
+render() {
 	return (
 		<View>
 			<ScreenHeader title="Bank Details" />
@@ -99,7 +91,7 @@ const BankDetails = () => {
 								<Text style={styles.key}>Name : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{bankName}</Text>
+								<Text style={styles.value}>{this.state.bankName}</Text>
 							</View>
 						</View>
 
@@ -108,7 +100,7 @@ const BankDetails = () => {
 								<Text style={styles.key}>Code : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{bankCode}</Text>
+								<Text style={styles.value}>{this.state.bankCode}</Text>
 							</View>
 						</View>
 
@@ -117,7 +109,7 @@ const BankDetails = () => {
 								<Text style={styles.key}>IFSC : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{ifsc}</Text>
+								<Text style={styles.value}>{this.state.ifsc}</Text>
 							</View>
 						</View>
 
@@ -126,7 +118,7 @@ const BankDetails = () => {
 								<Text style={styles.key}>Branch : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{branch}</Text>
+								<Text style={styles.value}>{this.state.branch}</Text>
 							</View>
 						</View>
 
@@ -135,7 +127,7 @@ const BankDetails = () => {
 								<Text style={styles.key}>Address : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{address}</Text>
+								<Text style={styles.value}>{this.state.address}</Text>
 							</View>
 						</View>
 
@@ -144,7 +136,7 @@ const BankDetails = () => {
 								<Text style={styles.key}>Contact : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{contact}</Text>
+								<Text style={styles.value}>{this.state.contact}</Text>
 							</View>
 						</View>
 
@@ -153,7 +145,7 @@ const BankDetails = () => {
 								<Text style={styles.key}>City : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{city}</Text>
+								<Text style={styles.value}>{this.state.city}</Text>
 							</View>
 						</View>
 
@@ -162,7 +154,7 @@ const BankDetails = () => {
 								<Text style={styles.key}>District : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{district}</Text>
+								<Text style={styles.value}>{this.state.district}</Text>
 							</View>
 						</View>
 
@@ -171,7 +163,7 @@ const BankDetails = () => {
 								<Text style={styles.key}>Centre : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{centre}</Text>
+								<Text style={styles.value}>{this.state.centre}</Text>
 							</View>
 						</View>
 
@@ -180,7 +172,7 @@ const BankDetails = () => {
 								<Text style={styles.key}>State : </Text>
 							</View>
 							<View style={styles.valueView}>
-								<Text style={styles.value}>{state}</Text>
+								<Text style={styles.value}>{this.state.state}</Text>
 							</View>
 						</View>
 						<Divider />
@@ -196,7 +188,7 @@ const BankDetails = () => {
 								</View>
 								<View style={styles.valueView}>
 									<Text style={styles.value}>
-										{rtgs ? 'Yes' : 'No'}
+										{this.state.rtgs ? 'Yes' : 'No'}
 									</Text>
 								</View>
 							</View>
@@ -207,7 +199,7 @@ const BankDetails = () => {
 								</View>
 								<View style={styles.valueView}>
 									<Text style={styles.value}>
-										{neft ? 'Yes' : 'No'}
+										{this.state.neft ? 'Yes' : 'No'}
 									</Text>
 								</View>
 							</View>
@@ -218,7 +210,7 @@ const BankDetails = () => {
 								</View>
 								<View style={styles.valueView}>
 									<Text style={styles.value}>
-										{micr ? 'Yes' : 'No'}
+										{this.state.micr ? 'Yes' : 'No'}
 									</Text>
 								</View>
 							</View>
@@ -229,7 +221,7 @@ const BankDetails = () => {
 								</View>
 								<View style={styles.valueView}>
 									<Text style={styles.value}>
-										{imps ? 'Yes' : 'No'}
+										{this.state.imps ? 'Yes' : 'No'}
 									</Text>
 								</View>
 							</View>
@@ -240,7 +232,7 @@ const BankDetails = () => {
 								</View>
 								<View style={styles.valueView}>
 									<Text style={styles.value}>
-										{upi ? 'Yes' : 'No'}
+										{this.state.upi ? 'Yes' : 'No'}
 									</Text>
 								</View>
 							</View>
@@ -249,18 +241,19 @@ const BankDetails = () => {
 				</SafeAreaView>
 
 				<View style={styles.fabView}>
-					<TouchableOpacity onPress={() => setFavourite()}>
-						{fav ? <FavSelected /> : <FavNotSelected />}
+					<TouchableOpacity onPress={() => this.setState({fav: !this.state.fav})}>
+						{this.state.fav ? FavSelected() : FavNotSelected() }
 					</TouchableOpacity>
 				</View>
 
-                <Snackbar visible={visible} duration={2000} style={styles.snackBar} onDismiss={() => setVisible(false)}>
-                    {sbText}
+                <Snackbar visible={this.state.visible} duration={2000} style={styles.snackBar} onDismiss={() => this.setState({visible: false})}>
+                    {this.state.sbText}
                 </Snackbar>
 
 			</View>
 		</View>
 	);
+}
 };
 
 const styles = StyleSheet.create({
@@ -281,7 +274,7 @@ const styles = StyleSheet.create({
 		flex: 0.3
 	},
 	key: {
-		fontFamily: 'Piazzolla-Bold',
+		// fontFamily: 'Piazzolla-Bold',
 		fontSize: 20,
 		marginLeft: 10
 	},
@@ -290,7 +283,7 @@ const styles = StyleSheet.create({
 		marginRight: 10
 	},
 	value: {
-		fontFamily: 'Piazzolla-Light',
+		// fontFamily: 'Piazzolla-Light',
 		fontSize: 20
 	},
 	paymentView: {
