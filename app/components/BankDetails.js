@@ -27,6 +27,7 @@ class BankDetails extends React.Component {
 	constructor(props){
 		super(props);
 		const BANKINFO = this.props.navigation.state.params.bankData;
+		console.log('info ',BANKINFO);
 		this.state= {
 			fav: false,
 			visible: false,

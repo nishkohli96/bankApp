@@ -10,12 +10,3 @@ export const getBanks = () =>
 		get(substate, 'banksList', null)
 	);
 
-// export const selectBanksIsLoading = () =>
-// 	createSelector(selectBankDomain, substate =>
-// 		get(substate, 'banksIsLoading', null)
-// 	);
-
-// export const selectBanksErrorMessage = () =>
-// 	createSelector(selectBankDomain, substate =>
-// 		get(substate, 'banksErrorMessage', null)
-// 	);

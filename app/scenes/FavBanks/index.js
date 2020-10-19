@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import ScreenHeader from '@atoms/ScreenHeader';
 import { connect } from 'react-redux';
 import { bankActions } from './reducer';
@@ -10,15 +10,21 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 class FavBanks extends React.Component {
     
     BankItem =  ({ bank }) => {
+        const nav = this.props.navigation;
+        
         return (
-            <View style={styles.itemRow}>
-                <View style={styles.itemView}>
-                    <Text style={styles.itemText}>{bank.ifsc}</Text>
+            <TouchableOpacity onPress={ ()=> nav.navigate('BankInfo', { bankData: bank })}>
+                <View style={styles.itemRow}>
+                    <View style={styles.itemView}>
+                        <Text style={styles.itemText}>{bank.ifsc}</Text>
+                    </View>
+                    <TouchableOpacity onPress={()=>console.log('btn pressed')}>
+                        <View style={styles.deleteIcon}>
+                            <MaterialCommunityIcons name="delete" size={26} color="grey" />
+                        </View>  
+                    </TouchableOpacity>          
                 </View>
-                <View style={styles.deleteIcon}>
-                    <MaterialCommunityIcons name="delete" size={26} color="black" />
-                </View>            
-            </View>
+            </TouchableOpacity>          
         );
     }
 
