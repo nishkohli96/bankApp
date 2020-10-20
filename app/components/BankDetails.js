@@ -15,6 +15,13 @@ import { connect } from 'react-redux';
 import { bankActions } from '@scenes/FavBanks/reducer';
 import { getBanks } from '@scenes/FavBanks/selectors';
 import { createStructuredSelector } from 'reselect';
+import { AppLoading } from 'expo';
+import * as Font from 'expo-font';
+
+let customFonts = {
+	'Piazzolla-Bold': require('@assets/fonts/Piazzolla-Bold.ttf'),
+	'Piazzolla-Light': require('@assets/fonts/Piazzolla-Light.ttf')
+}
 
 const FavSelected = () => {
 	return <FontAwesome name="heart" size={30} color="pink" />;
@@ -30,8 +37,18 @@ class BankDetails extends React.Component {
 		this.state = {
 			fav: false,
 			visible: false,
-			sbText: null
+			sbText: null,
+			fontsLoaded: false
 		};
+	}
+
+	async _loadFontsAsync() {
+		await Font.loadAsync(customFonts);
+		this.setState({ fontsLoaded: true });
+	  }
+	
+	componentDidMount() {
+		this._loadFontsAsync();
 	}
 
 	setFavourite() {
@@ -53,6 +70,9 @@ class BankDetails extends React.Component {
 	}
 
 	render() {
+		if (!this.state.fontsLoaded) {
+			return <AppLoading />;
+		}
 		return (
 			<View>
 				<ScreenHeader title="Bank Details" />
@@ -321,7 +341,7 @@ const styles = StyleSheet.create({
 		flex: 0.3
 	},
 	key: {
-		// fontFamily: 'Piazzolla-Bold',
+		fontFamily: 'Piazzolla-Bold',
 		fontSize: 20,
 		marginLeft: 10
 	},
@@ -330,7 +350,7 @@ const styles = StyleSheet.create({
 		marginRight: 10
 	},
 	value: {
-		// fontFamily: 'Piazzolla-Light',
+		fontFamily: 'Piazzolla-Light',
 		fontSize: 20
 	},
 	paymentView: {

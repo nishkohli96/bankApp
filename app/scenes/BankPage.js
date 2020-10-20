@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		flexDirection: 'row',
 		flexWrap: 'wrap',
-		padding: 30
+		padding: 20
 	}
 });
 
