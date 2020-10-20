@@ -14,7 +14,7 @@ class FavBanks extends React.Component {
 
         return (
 			<TouchableOpacity
-				onPress={() => nav.navigate('BankInfo', { bankData: bank })}
+				onPress={() => nav.navigate('BankInfo', { bankData: bank, fav: true })}
 			>
 				<View style={styles.itemRow}>
 					<View style={styles.itemView}>

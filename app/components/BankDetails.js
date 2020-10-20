@@ -35,7 +35,6 @@ class BankDetails extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			fav: false,
 			visible: false,
 			sbText: null,
 			fontsLoaded: false
@@ -52,15 +51,17 @@ class BankDetails extends React.Component {
 	}
 
 	setFavourite() {
+		if(this.props.navigation.state.params.fav){
+			return;
+		}
 		if(this.props.bankList.length >= 10){
 			this.setState({ 
 				visible: true,
 				sbText: 'Max 10 Entries can be saved' 
 			});
 		} 
-		else if (!this.state.fav) {
+		else if (!this.props.navigation.state.params.fav) {
 			this.setState({ 
-				fav: true,
 				visible: true,
 				sbText: 'Bank added to Favourites'
 			});
@@ -305,7 +306,7 @@ class BankDetails extends React.Component {
 						<TouchableOpacity
 							onPress={this.setFavourite.bind(this)}
 						>
-							{this.state.fav ? FavSelected() : FavNotSelected()}
+							{this.props.navigation.state.params.fav ? FavSelected() : FavNotSelected()}
 						</TouchableOpacity>
 					</View>
 
