@@ -23,59 +23,57 @@ class SearchBank extends React.Component {
 	}
 
 	getBankDetails = async () => {
+	  if (this.state.text === null) {
+	    this.setState({
+	      visible: true,
+	      sbText: 'Please enter something....'
+	    });
+	    return;
+	  }
 
-		if (this.state.text === null) {
-			this.setState({
-				visible: true,
-				sbText: 'Please enter something....'
-			});
-			return;
-		}
+	  const connected = (await NetInfo.fetch()).isConnected;
 
-		const connected = (await NetInfo.fetch()).isConnected;
-
-		if (!connected) {
-			this.setState({
-				visible: true,
-				sbText: 'No Internet Connection Detected'
-			});
-			return;
+	  if (!connected) {
+	    this.setState({
+	      visible: true,
+	      sbText: 'No Internet Connection Detected'
+	    });
 		} else {
-			const result = await GetBankDetails(this.state.text.trim());
-			
-			if (result.status === 200) {
-				const bankObj = {
-					bankName: result.data.BANK,
-					address: result.data.ADDRESS,
-					bankCode: result.data.BANKCODE,
-					branch: result.data.BRANCH,
-					centre: result.data.CENTRE,
-					city: result.data.CITY,
-					contact: result.data.CONTACT,
-					district: result.data.DISTRICT,
-					ifsc: result.data.IFSC,
-					imps: result.data.IMPS,
-					micr: result.data.MICR,
-					neft: result.data.NEFT,
-					rtgs: result.data.RTGS,
-					state: result.data.STATE,
-					upi: result.data.UPI
-				};
-				this.props.navigation.navigate('BankInfo', {
-					bankData: bankObj
-				});
-				this.setState({
-					text: null,
-					visible: false,
-					sbText: false
-				});
-			} else {
-				this.setState({
-					visible: true,
-					sbText: 'No Bank Info Found'
-				});
-			}
-		}
+	    const result = await GetBankDetails(this.state.text.trim());
+
+	    if (result.status === 200) {
+	      const bankObj = {
+	        bankName: result.data.BANK,
+	        address: result.data.ADDRESS,
+	        bankCode: result.data.BANKCODE,
+	        branch: result.data.BRANCH,
+	        centre: result.data.CENTRE,
+	        city: result.data.CITY,
+	        contact: result.data.CONTACT,
+	        district: result.data.DISTRICT,
+	        ifsc: result.data.IFSC,
+	        imps: result.data.IMPS,
+	        micr: result.data.MICR,
+	        neft: result.data.NEFT,
+	        rtgs: result.data.RTGS,
+	        state: result.data.STATE,
+	        upi: result.data.UPI
+	      };
+	      this.props.navigation.navigate('BankInfo', {
+	        bankData: bankObj
+	      });
+	      this.setState({
+	        text: null,
+	        visible: false,
+	        sbText: false
+	      });
+	    } else {
+	      this.setState({
+	        visible: true,
+	        sbText: 'No Bank Info Found'
+	      });
+	    }
+	  }
 	};
 
 	render() {
@@ -124,7 +122,7 @@ const styles = StyleSheet.create({
 		padding: 30
 	},
 	textInput: {
-		backgroundColor: '#edf5ef'
+		backgroundColor: 'beige'
 	},
 	srchBtn: {
 		marginTop: 30

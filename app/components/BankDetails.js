@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import { Divider, Snackbar } from 'react-native-paper';
 import ScreenHeader from '@atoms/ScreenHeader';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
+
 import { connect } from 'react-redux';
 import { bankActions } from '@scenes/FavBanks/reducer';
 import { getBanks } from '@scenes/FavBanks/selectors';
@@ -18,18 +18,16 @@ import { createStructuredSelector } from 'reselect';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 
-let customFonts = {
+const customFonts = {
 	'Piazzolla-Bold': require('@assets/fonts/Piazzolla-Bold.ttf'),
 	'Piazzolla-Light': require('@assets/fonts/Piazzolla-Light.ttf')
-}
-
-const FavSelected = () => {
-	return <FontAwesome name="heart" size={30} color="pink" />;
 };
 
-const FavNotSelected = () => {
-	return <FontAwesome5 name="heart" size={30} color="pink" />;
-};
+const FavSelected = () => <FontAwesome name="heart" size={30} color="pink" />;
+
+const FavNotSelected = () => (
+	<FontAwesome5 name="heart" size={30} color="pink" />
+);
 
 class BankDetails extends React.Component {
 	constructor(props) {
@@ -44,24 +42,27 @@ class BankDetails extends React.Component {
 	async _loadFontsAsync() {
 		await Font.loadAsync(customFonts);
 		this.setState({ fontsLoaded: true });
-	  }
-	
+  }
+
 	componentDidMount() {
 		this._loadFontsAsync();
+		this.props.navigation.state.params.fav = this.props.bankList.find(
+			bank =>
+        bank.ifsc === this.props.navigation.state.params.bankData.ifsc
+		);
 	}
 
 	setFavourite() {
-		if(this.props.navigation.state.params.fav){
+		if (this.props.navigation.state.params.fav) {
 			return;
 		}
-		if(this.props.bankList.length >= 10){
-			this.setState({ 
+		if (this.props.bankList.length >= 10) {
+			this.setState({
 				visible: true,
-				sbText: 'Max 10 Entries can be saved' 
+				sbText: 'Max 10 Entries can be saved'
 			});
-		} 
-		else if (!this.props.navigation.state.params.fav) {
-			this.setState({ 
+		} else if (!this.props.navigation.state.params.fav) {
+			this.setState({
 				visible: true,
 				sbText: 'Bank added to Favourites'
 			});
@@ -306,7 +307,9 @@ class BankDetails extends React.Component {
 						<TouchableOpacity
 							onPress={this.setFavourite.bind(this)}
 						>
-							{this.props.navigation.state.params.fav ? FavSelected() : FavNotSelected()}
+							{this.props.navigation.state.params.fav
+                ? FavSelected()
+                : FavNotSelected()}
 						</TouchableOpacity>
 					</View>
 
